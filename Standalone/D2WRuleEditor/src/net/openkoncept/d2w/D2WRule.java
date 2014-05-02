@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public class D2WRule {
 
-	public static final Pattern RULE_PATTERN = Pattern.compile("(\\d+)\\s*:\\s*(.+)\\s*=>\\s*(.+)\\s*=\\s*(.+)\\s*\\[([\\w\\d_.-]+)]\\s*");
+	public static final Pattern RULE_PATTERN = Pattern.compile("(\\d+)(?:\\s*:\\s*)(.*)(?:\\s*=>\\s*)(.*)(?:\\s*=\\s*)(.*)(?:\\s*\\[)(.*)(?:\\])");
 
 	private int priority;
 	private String condition;
@@ -35,11 +35,11 @@ public class D2WRule {
 		Matcher m = RULE_PATTERN.matcher(text);
 		if (m.find()) {
 			D2WRule rule = new D2WRule();
-			rule.setPriority(Integer.parseInt(m.group(1).trim()));
-			rule.setCondition(m.group(2).trim());
-			rule.setKey(m.group(3).trim());
-			rule.setValue(m.group(4).trim());
-			rule.setAssignmentType(m.group(5).trim());
+			rule.setPriority(Integer.parseInt(m.group(1)));
+			rule.setCondition(m.group(2));
+			rule.setKey(m.group(3));
+			rule.setValue(m.group(4));
+			rule.setAssignmentType(m.group(5));
 			System.err.println(rule);
 		}
 		return null;
